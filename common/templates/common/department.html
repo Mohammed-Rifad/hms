@@ -1,0 +1,207 @@
+{% extends 'common/index.html' %}
+{% load static %}
+
+{% block header %}
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-title bg-1">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="block text-center">
+					<h1 class="text-capitalize mb-5 text-lg">Departments</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="section service-2">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7 text-center">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-4 col-md-6 ">
+				<div class="department-block mb-5">
+				<a href="{% url 'common:dept-single' %}">	<img src="{% static 'images/dept/cardiology.jpg' %}" alt="" width="350px" height="250px"> </a>
+					<div class="content">
+                     
+					<a href="{% url 'common:dept-single' %}">	<h4 class="mt-4 mb-2 title-color">Heart Care</h4> </a>
+						<p class="mb-4">The Heaven Hospital Department of Cardiology offers the latest innovations in invasive and noninvasive heart care to patients of all ages.</p>
+						<a href="{% url 'common:dept-single' %}" class="read-more">Learn More  <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6">
+				<div class="department-block mb-5">
+					<img src="{% static 'images/dept/pregnancy-1.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2  title-color">Women Care</h4>
+						<p class="mb-4">Our team of Obstetrics and gynaecologists at the department provide comprehensive treatment.</p>
+						<a href="womencare" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-6">
+				<div class="department-block mb-5">
+					<img src="{% static 'images/dept/paediatrics-img.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Child Care</h4>
+						<p class="mb-4">Heaven offers best care available in modern pediatric medicine, delivered in its state of the art facilities.</p>
+						<a href="childcare" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+<br><br>
+
+			<div class="col-lg-4 col-md-6 ">
+				<div class="department-block  mb-5 mb-lg-0">
+					<img src="{% static 'images/dept/neuro.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Neuro Science</h4>
+						<p class="mb-4">The Institute of Neuro Sciences at Heaven is a Centre of Excellence that focuses on providing comprehensive brain, spine and nerve care.</p>
+						<a href="neuroscience" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6">
+				<div class="department-block mb-5 mb-lg-0">
+					<img src="{% static 'images/dept/gastro.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Liver and Gastro Science</h4>
+						<p class="mb-4">Our Institute of Liver and Gastro Sciences is fully equipped for managing conditions pertaining to Digestive & Hepatobiliary diseases.</p>
+						<a href="liver" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-6">
+				<div class="department-block mb-5 mb-lg-0">
+					<img src="{% static 'images/dept/ortho.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Orthopaedics</h4>
+						<p class="mb-4">The department of orthopaedics with international facilities and skilled experts’ guidance assure optimal medical.</p>
+						<a href="orthopaedics" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br><br>
+	
+
+		<div class="row">
+			<div class="col-lg-4 col-md-6 ">
+				<div class="department-block mb-5">
+					<img src="{% static 'images/dept/renal.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Renal Care</h4>
+						<p class="mb-4">The center of excellence for Nephrology and Urology at Heaven is equipped with state of the art technical support and is dedicated to providing the best of care to patients.</p>
+						<a href="renalcare" class="read-more">Learn More  <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6">
+				<div class="department-block mb-5">
+					<img src="{% static 'images/dept/endocrine-1.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2  title-color">Endocrine Science</h4>
+						<p class="mb-4">The department of Endocrinology at Heaven is committed to providing comprehensive care to patients with hormonal and metabolism conditions.</p>
+						<a href="endocrine" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-6">
+				<div class="department-block mb-5">
+					<img src="{% static 'images/dept/psy.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Psychiatry</h4>
+						<p class="mb-4">The Heaven Psychiatry Department imparts comprehensive and compassionate patient care while dealing with child, adolescent, adult, and geriatric mental health.</p>
+						<a href="psychiarty" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+<br><br>
+
+			<div class="col-lg-4 col-md-6 ">
+				<div class="department-block  mb-5 mb-lg-0">
+					<img src="{% static 'images/dept/oncology.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Oncology</h4>
+						<p class="mb-4">From diagnosis to treating cancer and even managing certain cancer-related symptoms, surgery plays a crucial role.</p>
+						<a href="oncology" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6">
+				<div class="department-block mb-5 mb-lg-0">
+					<img src="{% static 'images/dept/anesthesiology.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Anaesthesiology</h4>
+						<p class="mb-4">The department of anaesthesiology is the backbone of surgery, and we at Heaven have taken care to keep pace with the advancement.</p>
+						<a href="anaesthesiology" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-6">
+				<div class="department-block mb-5 mb-lg-0">
+					<img src="{% static 'images/dept/Radiology.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Radiology</h4>
+						<p class="mb-4">The Institute of Radiology and Imaging Sciences department in Heaven is one of the most state-of-the-art facilities in the entire country </p>
+						<a href="radiology" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	<br><br>
+		<div class="row">
+			<div class="col-lg-4 col-md-6 ">
+				<div class="department-block mb-5">
+					<img src="{% static 'images/dept/dermatology.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color">Dermatology</h4>
+						<p class="mb-4">Heaven has a dedicated team of specialist headed by senior dermatologists to ensure the health of your skin. </p>
+						<a href="dermatology" class="read-more">Learn More  <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6">
+				<div class="department-block mb-5">
+					<img src="{% static 'images/dept/blood2.jpg' %}" alt="" width="350px" height="250px">
+					<div class="content">
+						<h4 class="mt-4 mb-2  title-color">Blood Bank</h4>
+						<p class="mb-4">A blood bank is a center where blood gathered as a result of blood donation is stored and preserved for later use in blood transfusion. </p>
+						<a href="bloodbank" class="read-more">Learn More <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+
+
+
+	</div>
+</section>
+
+
+
+{% endblock %}

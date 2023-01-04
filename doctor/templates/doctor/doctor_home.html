@@ -1,0 +1,107 @@
+{% extends 'doctor/doctor_master.html' %}
+{% load static %}
+
+{% block header %}
+<!-- Add style tag for individual pages  -->
+
+<link rel="stylesheet" href=" {% static 'css/cards.css' %}" />
+
+{% endblock %}
+
+{% block content %}
+
+<h1 style="color: rgb(6, 6, 165);  text-align: center;"
+class="mb-4">
+Welcome {{ doc_name | title }}
+</h1>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+ 
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card-category-5">
+        <!-- <div class="category-name">Personal Cards</div> <br/><br/> -->
+
+        <ul class="all-pr-cards">
+          <li>
+            <div class="per-card-3">
+              <div class="card-image">
+                <span></span>
+                <img src="{% static 'assets/img/calendar.png' %}" class="logo" />
+              </div>
+
+              <div class="card-content">
+                <span class="per-position"><br /><br />TOTAL APPOINTMENTS</span>
+                <div class="social-icons">
+                  <i class="fa-solid fa-7"><br /><a style="color: #fff" href="{% url 'doctor:appointment' %}">0</a> </i>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="per-card-3">
+              <div class="card-image">
+                <span></span>
+                <img src="{% static 'images/pt.png' %}" class="logo" />
+              </div>
+
+              <div class="card-content">
+                <span class="per-position"><br /><br /> PATIENTS LIST</span>
+                <div class="social-icons">
+                  <i class="fa-solid fa-7"><br /><a style="color: #fff" href="{% url 'doctor:search-pt' %}">0</a> </i>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- <div class="card-category-5">
+
+        <ul class="all-pr-cards">
+          <li>
+            <div class="per-card-3">
+              <div class="card-image">
+                <span></span>
+                <img src="{% static 'assets/img/images.png' %}" class="logo" />
+              </div>
+
+              <div class="card-content mb-5">
+                <span class="per-position"><br /><br />DEPARTMENTS</span>
+                <div class="social-icons">
+                  <i class="fa-solid fa-7" style="font-style: #fff"><br />0</i>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="per-card-3">
+              <div class="card-image">
+                <span></span>
+                <img src="{% static 'images/pt.png' %}" class="logo" />
+              </div>
+
+              <div class="card-content mb-5">
+                <span class="per-position"><br /><br />PATIENTS LIST</span>
+                <div class="social-icons">
+                  <i class="fa-solid fa-7" style="font-style: #fff"><br />0</i>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div> -->
+
+    </div>
+  </div>
+</div>
+
+    <!-- calendar icon  -->
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+
+{% endblock %}

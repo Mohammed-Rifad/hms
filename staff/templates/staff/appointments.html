@@ -1,0 +1,48 @@
+{% extends 'staff/staff_masterpage.html' %}
+{% load static %}
+
+{% block header %}
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+{% endblock %}
+
+{% block content %}
+
+
+<h1 style="color: rgb(6, 6, 165); text-align: center;">
+  Appointment List
+</h1>
+
+<section class="appoinment section">
+    <div class="container">
+      <div class="row">
+          <table class="table table-primary table-striped">
+              <tr>
+                  <th>Sl No</th>
+                  <th>Patient</th>
+                  <th> Doctor </th>
+                  <th> Department </th>
+                  <th> Date </th>
+                  <th> Time </th>
+                  <th> Status </th>
+                  <th> Action </th>
+              </tr>
+              <tr>
+                  <td>1</td>				
+                  <td> John Samnuel </td>
+                  <td> Thomas Henry </td>
+                  <td> Cardiology </td>
+                  <td> 21-08-2022 </td>
+                  <td> 10:00:00 </td>
+                  <td> Active</td>
+                  <td> <button type="button" class="btn btn-light"> Cancel </button>  </td>
+              </tr>
+             
+            </table>    
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

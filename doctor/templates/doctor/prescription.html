@@ -1,0 +1,41 @@
+{% extends 'doctor/doctor_masterpage.html' %}
+{% load static %}
+
+{% block header %}
+<style>
+    #pres {
+        min-height: 400px;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<!-- Prescription  -->
+<div class="container" id="pres">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 text-center">
+            <button type="button"> Add New </button>
+            <div class="mt-5">
+                <table class="table table-primary table-striped">
+                    <tr>
+                        <th> Date </th>
+                        <th> Patient </th>
+                        <th> Medicine </th>
+                        <th> Options </th>
+                        <th> Action </th>
+                    </tr>
+                    <tr>
+                        <td> 12:00:00 </td>
+                        <td> Alexnder James </td>
+                        <td> </td>
+                        <td></td>
+                        <td> <button type="button" class="btn btn-light"> Generate </button> </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

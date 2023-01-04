@@ -1,0 +1,103 @@
+{% extends 'common/index.html' %}
+{% load static %}
+
+{% block header %}
+
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"
+  rel="stylesheet"
+/>
+
+<script src=" {% static 'js/doctor_cards.js' %}"></script>
+
+
+<link rel="stylesheet" href="{% static 'css/doctor_cards.css' %}" />
+
+<style>
+
+</style>
+
+<script>
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="page-title bg-1">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="block text-center">
+					<h1 class="text-capitalize mb-5 text-lg">Heart Care</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="section department-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="department-img">
+					<img src="images/service/bg-1.jpg" alt="" class="img-fluid">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-10">
+				<div class="department-content mt-5">
+					<h3 class="text-md">Medecine and Health</h3>
+					<div class="divider my-4"></div>
+					<p class="lead">Age forming covered you entered the examine. Blessing scarcely confined her contempt
+						wondered shy. Dashwoods contented sportsmen at up no convinced cordially affection.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae dolor autem laudantium,
+						quaerat vel dignissimos. Magnam sint suscipit omnis eaque unde eos aliquam distinctio, quisquam
+						iste, itaque possimus . Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet alias
+						modi eaque, ratione recusandae cupiditate dolorum repellendus iure eius rerum hic minus ipsa at,
+						corporis nesciunt tempore vero voluptas. Tempore.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+
+<section class="section team">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="section-title text-center">
+					<h3 class="text-md" style="align-content: left;">Our Doctors</h3>
+					<div class="divider mx-auto my-4"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="team-block mb-5 mb-lg-0">
+					<img src="{% static 'images/team/1.jpg' %}" alt="" class="img-fluid w-100">
+
+					<div class="content">
+						<h4 class="mt-4 mb-0"><a href="{% url 'common:dr-single' %}">John Marshal</a></h4>
+						<p>Internist, Emergency Physician</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+
+
+
+{% endblock %}
+

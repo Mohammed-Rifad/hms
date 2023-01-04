@@ -1,0 +1,104 @@
+{% extends 'hms_admin/admin_master.html' %}
+{% load static %}
+
+{% block header %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+<link rel="stylesheet" href=" {% static 'assets/css/add_doctor.css' %}">
+
+<style>
+    option{
+        color: black;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div>
+                    <h2 class="text-center mb-3 text-dark">Add Doctor</h2>
+
+
+                    <div style="display:flex;width:100%;">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <p class="text-danger" textalign="top">{{ error_message }}</p> 
+                            <p class="text-success" textalign="top">{{ success_message }}</p>
+                            <div style="width:100%;">
+
+                              <label class="text-dark">Name</label>
+                                <input name="doctor_name" autofocus type="text">
+                            </div>
+
+                            <div style="width:100%;">
+                               
+                                 
+                                <label class="text-dark">Email ID</label>
+                                <input name="doctor_email" type="email">
+                            </div>
+
+                          
+
+                            <div style="width:100%;">
+                                <label class="text-dark">Contact Number</label>
+                                <input name="doctor_number" type="number">
+                            </div>
+
+                            <div style="width:100%;">
+                                <label class="text-dark">Department</label>                            
+                                <select id="select" name="doctor_dept">
+                                    <option  selected disabled>Select Department</option>
+                                   
+                                    {% for dept in departments %} 
+                                            <option value="{{ dept.id }}">{{ dept.department }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>                     
+
+                            <div style="width:100%;">
+                                <label class="text-dark">Qualification</label>
+                                 <select name="qaulification" class="form-control text-dark" id="select">
+                                    <option value="select Qualification"> select Qualification</option>
+                                    <option value="MBBS">MBBS</option>
+                                    <option value="MD">MD</option>
+                                   
+                                 </select>
+                            </div>
+                            <div style="width:100%;">
+                                <label class="text-dark">Experience</label>
+                                <input name="experience" type="number">
+                            </div>
+                            <div style="width:40%;">
+                                <label class="text-dark">Consultancy Fee</label>
+                                <input name="fees">
+                            </div>
+                            <div style="width:50%; padding-left: 10%;">
+                                <label class="text-dark">Upload Photo</label>
+                                <input type="file" id="doctor_img" name="doctor_photo">
+                            </div>
+
+                          
+                                <button type="submit"> SUBMIT </button>
+                            
+
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

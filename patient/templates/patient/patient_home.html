@@ -1,0 +1,222 @@
+{% extends 'patient/patient_base.html' %} 
+{% load static %} 
+
+{% block header %}
+
+<link rel="stylesheet" href="{% static 'css/pt_home.css' %}" />
+
+<style>
+     
+
+</style>
+
+{% endblock %} 
+
+{% block content %}
+
+<section>
+    <div>
+        <div class="carousel">
+            <ul class="slides">
+                <input type="radio" name="radio-buttons" id="img-1" checked />
+                <li class="slide-container">
+                    <div class="slide-image">
+                        <img
+                            src="{% static 'images/img1.jpg' %}" />
+                    </div>
+                    <div class="carousel-controls">
+                        <label for="img-8" class="prev-slide">
+                            <span>&lsaquo;</span>
+                        </label>
+                        <label for="img-2" class="next-slide">
+                            <span>&rsaquo;</span>
+                        </label>
+                    </div>
+                </li>
+                <input type="radio" name="radio-buttons" id="img-2" />
+                <li class="slide-container">
+                    <div class="slide-image">
+                        <img
+                            src="{% static 'images/img2.jpg' %}" />
+                    </div>
+                    <div class="carousel-controls">
+                        <label for="img-1" class="prev-slide">
+                            <span>&lsaquo;</span>
+                        </label>
+                        <label for="img-3" class="next-slide">
+                            <span>&rsaquo;</span>
+                        </label>
+                    </div>
+                </li>
+                <input type="radio" name="radio-buttons" id="img-3" />
+                <li class="slide-container">
+                    <div class="slide-image">
+                        <img src="{% static 'images/img3.jpg' %}" />
+                    </div>
+                    <div class="carousel-controls">
+                        <label for="img-2" class="prev-slide">
+                            <span>&lsaquo;</span>
+                        </label>
+                        <label for="img-4" class="next-slide">
+                            <span>&rsaquo;</span>
+                        </label>
+                    </div>
+                </li>
+                <input type="radio" name="radio-buttons" id="img-4" />
+                <li class="slide-container">
+                    <div class="slide-image">
+                        <img src="{% static 'images/img4.webp' %}" />
+                    </div>
+                    <div class="carousel-controls">
+                        <label for="img-3" class="prev-slide">
+                            <span>&lsaquo;</span>
+                        </label>
+                        <label for="img-5" class="next-slide">
+                            <span>&rsaquo;</span>
+                        </label>
+                    </div>
+                </li>
+                <input type="radio" name="radio-buttons" id="img-5" />
+                <li class="slide-container">
+                    <div class="slide-image">
+                        <img src="{% static 'images/img5.jpg' %}" />
+                    </div>
+                    <div class="carousel-controls">
+                        <label for="img-4" class="prev-slide">
+                            <span>&lsaquo;</span>
+                        </label>
+                        <label for="img-6" class="next-slide">
+                            <span>&rsaquo;</span>
+                        </label>
+                    </div>
+                </li>
+                <input type="radio" name="radio-buttons" id="img-6" />
+                <li class="slide-container">
+                    <div class="slide-image">
+                        <img src="{% static 'images/img6.jpg' %}" />
+                    </div>
+                    <div class="carousel-controls">
+                        <label for="img-5" class="prev-slide">
+                            <span>&lsaquo;</span>
+                        </label>
+                        <label for="img-7" class="next-slide">
+                            <span>&rsaquo;</span>
+                        </label>
+                    </div>
+                </li>
+                <input type="radio" name="radio-buttons" id="img-7" />
+                <li class="slide-container">
+                    <div class="slide-image">
+                        <img src="{% static 'images/img7.jpg' %}" />
+                    </div>
+                    <div class="carousel-controls">
+                        <label for="img-6" class="prev-slide">
+                            <span>&lsaquo;</span>
+                        </label>
+                        <label for="img-8" class="next-slide">
+                            <span>&rsaquo;</span>
+                        </label>
+                    </div>
+                </li>
+                <input type="radio" name="radio-buttons" id="img-8" />
+                <li class="slide-container">
+                    <div class="slide-image">
+                        <img src="{% static 'images/img8.jpg' %}" />
+                    </div>
+                    <div class="carousel-controls">
+                        <label for="img-7" class="prev-slide">
+                            <span>&lsaquo;</span>
+                        </label>
+                        <label for="img-1" class="next-slide">
+                            <span>&rsaquo;</span>
+                        </label>
+                    </div>
+                </li>
+                <div class="carousel-dots">
+                    <label for="img-1" class="carousel-dot" id="img-dot-1"></label>
+                    <label for="img-2" class="carousel-dot" id="img-dot-2"></label>
+                    <label for="img-3" class="carousel-dot" id="img-dot-3"></label>
+                    <label for="img-4" class="carousel-dot" id="img-dot-4"></label>
+                    <label for="img-5" class="carousel-dot" id="img-dot-5"></label>
+                    <label for="img-6" class="carousel-dot" id="img-dot-6"></label>
+                    <label for="img-7" class="carousel-dot" id="img-dot-7"></label>
+                    <label for="img-8" class="carousel-dot" id="img-dot-8"></label>
+                </div>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<h1 style="color: rgb(6, 6, 165); margin-top: 50px; text-align: center;"
+  class="mb-4">
+  Welcome  {{ pat_name | title }}
+</h1>
+
+  
+  <div class="card-category-5">
+  
+	<ul class="all-pr-cards">
+	  <li>
+		<div class="per-card-3">
+		  <div class="card-image">
+			<span></span>
+			<img src="{% static 'assets/img/calendar.png' %}" class="logo" />
+		  </div>
+  
+		  <div class="card-content">
+			<span class="per-position"><br><br>LAST APPOINTMENT</span>
+			<div class="social-icons">
+			  <i class="fa-solid fa-7"><br><br> <a style="color: #fff" href="{% url 'patient:bookings' %}"> Date & Time</a></i>
+			</div>
+		  </div>
+		</div>
+	  </li>
+  
+	  <li>
+		<div class="per-card-3">
+		  <div class="card-image">
+			<span></span>
+			<img src="{% static 'assets/img/calendar.png' %}" class="logo" />
+		  </div>
+  
+		  <div class="card-content">
+			<span class="per-position"><br><br>BOOKINGS</span>
+			<div class="social-icons">
+			  <i class="fa-solid fa-7" ><br><br> <a style="color: #fff" href="{% url 'patient:bookings' %}">0</a> </i>
+			</div>
+		  </div>
+		</div>
+	  </li>
+	</ul>
+  </div>
+
+
+{% endblock %}
+
+<!-- <script>
+		// Get the modal
+		var modal = document.getElementById("myModal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks the button, open the modal 
+		btn.onclick = function () {
+			modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function () {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script> -->

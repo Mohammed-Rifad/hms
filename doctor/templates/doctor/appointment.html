@@ -1,0 +1,54 @@
+{% extends 'doctor/doctor_master.html' %}
+{% load static %}
+
+{% block header %}
+<style>
+#appts{
+	min-height: 400px;
+}
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<h1 style="color: rgb(6, 6, 165); margin-top: 50px; text-align: center;"
+  class="mb-4"> Appointment List </h1>
+
+<section>
+
+	<!-- My Appointments  -->
+	<div class="container" id="appts">
+		<div class="row justify-content-center">
+			<div class="col-lg-10 text-center">
+				<div class="mt-5">
+					<table class="table table-primary table-striped">
+						<tr>
+							<th> Sl No </th>
+							<th> Patient ID </th>
+							<th> Patient Name </th>							
+							<th> Date </th>
+							<th> Time </th>
+							<th> Remarks </th>
+							<th> Status </th>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>KJK54641</td>
+							<td> Thomas Henry </td>
+							<td> 21-08-2022 </td>
+							<td> 10:00:00 </td>
+							<td></td>
+							<td> Booked </td> 
+							<!--  booked/cancelled -->
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+</section>
+
+{% endblock %}

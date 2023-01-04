@@ -1,0 +1,47 @@
+{% extends 'staff/staff_masterpage.html' %}
+{% load static %}
+
+{% block header %}
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+{% endblock %}
+
+{% block content %}
+
+<h1 style="color: rgb(6, 6, 165); text-align: center;">
+  Staff List
+</h1>
+
+<section class="section">
+
+    <div class="container"> 
+
+      <div class="row">
+          <table class="table table-primary table-striped">
+              <tr>
+                  <th>Sl No</th>
+                  <th> Staff ID </th>
+                  <th>Staff Name</th>
+                  <th> Joined Date </th>
+                  <!-- <th>Department</th> -->
+                  <th> Status </th>
+                  <th> Action </th>
+              </tr>
+              <tr>
+                  <td>1</td>		
+                  <td>ID No</td>		
+                  <td> Cindy </td>
+                  <td> 12/12/2014 </td>
+                  <!-- <td>Reception</td> -->
+                  <td> Active</td>
+                  <td> <button type="button" class="btn btn-light"> Remove </button>  </td>
+              </tr>
+             
+            </table>    
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+.heading {
+    color: black;
+    font-weight: 600;
+    text-align: center;
+}
+
+input [type ='text'], input[type ='password'] {
+    
+    width: 200px;
+}
