@@ -17,7 +17,7 @@ urlpatterns = [
     path('appointment-2', views.appt_2, name='appointment_2'),
     path('appointment-3', views.appt_3, name='appointment_3'),
     path('booking-confirmation', views.appt_4, name='appointment_4'),
-    path('appointment-list', views.appt_list, name='appointment_list'),
+    path('booking-history', views.booking_history, name='booking_history'),
     path('get-doctors', views.get_doctors, name='get_doctors'),
     path('check-availability', views.check_availability, name='check-availability')
 

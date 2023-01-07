@@ -28,6 +28,10 @@
         display: none;
     }
 
+    #btn_proceed {
+        display: none;
+    }
+
     #time_slot {
         display: flex;
     }
@@ -39,7 +43,7 @@
         height: 60px;
         font-size: 14px;
         border-radius: 10px;
-    
+
     }
 
 
@@ -138,14 +142,30 @@
 
 <div class="row">
     <div class="col-4"></div>
-    <div class="col-4">
-        <form>
-            <div class="md-form md-outline input-with-post-icon datepicker">
-                <label for="date">Consultation Date</label>
-                <input placeholder="Select date" type="date" id="consultation_date" name="consultation_date"
-                    class="form-control">
-            </div>
-        </form>
+    <div class="col-7">
+
+
+        <table style="width: 500px;border-collapse: separate; border-spacing: 10px;">
+            <tr>
+                <td> <label for="date">Consultation Date</label></td>
+            </tr>
+            <tr>
+                <td>
+                    <input placeholder="Select date" type="date" id="consultation_date" name="consultation_date"
+                        class="form-control">
+                </td>
+                <td>
+
+                    <a type="button" id='btn_proceed' class="btn btn-primary"> PROCEED</a>
+                </td>
+            </tr>
+        </table>
+        <div class="md-form md-outline input-with-post-icon datepicker">
+
+
+
+        </div>
+
     </div>
     <div class="col-4"></div>
 </div>
@@ -179,7 +199,8 @@
     <div class="row slot">
         <div class="col-5"></div>
         <div class="col-2">
-            <a href="{% url 'patient:appointment_3' %}" class="btn btn-primary">PROCEED</a>
+
+            <!-- button  -->
         </div>
         <div class="col-5"></div>
     </div>
@@ -187,6 +208,8 @@
 <div id="err_div">Doctor Not Available For Selected Date</div>
 
 <script>
+    var show_proceed = false;
+    var btn_id = 0;
     var session_div = document.getElementById('time_slot')
     var query_string = window.location.search
     var urlParamsArr = new URLSearchParams(query_string)
@@ -194,8 +217,15 @@
     console.log(dr_id)
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+
+   
+
     $('#consultation_date').change(function () {
 
+        let dt1 = $('#consultation_date').val()
+
+        
+         
         var dt = new Date($('#consultation_date').val())
         var selected_day = days[dt.getDay()]
         $('#time_slot').empty()
@@ -227,11 +257,13 @@
                     $('#div_slot').show()
                     $('#err_div').hide()
 
+
                     let records = response.consultation_record
 
                     console.log(response.consultation_record)
 
                     for (var i = 0; i < records.length; i++) {
+
                         let obj = records[i]
 
                         console.log(obj)
@@ -241,13 +273,18 @@
                             console.log('key', obj[j])
 
                             let arr = obj[j]
+
                             for (let k = 0; k < arr.length; k++) {
+
                                 let btn = document.createElement("button")
-                                btn.setAttribute('class','session-btn btn-border')
-                                
+                                let btn_id = 'btn' + (k + 1)
+                                btn.setAttribute('id', btn_id)
+                                btn.setAttribute('onclick', 'display()')
+                                btn.setAttribute('class', 'session-btn btn-border')
+
                                 btn.innerHTML = arr[k]
                                 session_div.append(btn)
-                            }   
+                            }
                         }
 
 
@@ -258,15 +295,49 @@
                 }
 
                 else {
+
                     $('#div_slot').hide()
                     $('#err_div').show()
                     console.log('no')
+
                 }
             }
 
 
         })
     })
+
+
+    var selected_slot;
+    function display() {
+
+        selected_slot = document.getElementById(event.target.id)
+
+        btn_id = event.target.id
+        console.log(selected_slot.value)
+
+        selected_slot.style.background = "green"
+        $('#btn_proceed').show()
+    }
+
+    $('#btn_proceed').click(function () {
+
+         
+
+        let selected_time = document.getElementById(btn_id).innerHTML
+        let selected_date = $('#consultation_date').val()
+        
+
+        window.location.href = "{% url 'patient:appointment_3' %}?dr=" + dr_id + "&&date=" + selected_date + "&&time=" + selected_time
+
+    })
+
+</script>
+
+
+<script>
+
+
 </script>
 
 {% endblock %}

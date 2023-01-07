@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
 from common.models import Patient
+from . models import Booking
 from hms_admin.models import Department,Doctor,Consultation
 from datetime import datetime
+from random import randint
 from .services import get_slots,create_slots
 from django.http import JsonResponse,HttpResponse
 # Create your views here.
@@ -88,21 +90,87 @@ def appt_2(request):
 
     consultation_record = Consultation.objects.filter(doctor = doctor_id).order_by('day').values()
     
-    # sessions = create_slots(consultation_record)
-
-    # print('*****',sessions)
-    
+    if request.method == 'POST' :
+        pass
     
     return render(request,'patient/appt_2.html', {'doctor' :doctor_record,'consultation' : consultation_record })
 
 def appt_3(request):
-    return render(request,'patient/appt_3.html')
+
+   
+
+     
+    
+
+
+
+    if request.method == 'POST' :
+        
+        patient_name = request.POST['p_name']
+        gender  = request.POST['gender']
+        mobile = request.POST['mobile']
+        age = request.POST['age']
+        selected_date = datetime.strptime(request.GET.get('date'), '%Y-%m-%d').date().strftime('%d-%m-%Y')
+        dr = request.GET.get('dr')
+        selected_time = request.GET.get('time')
+        reference_no = 'Ref' + str(randint(1111,9999)) +'Hms' + mobile[6:10]
+
+        new_booking  = Booking(
+                        patient_id = request.session['patient'],
+                        patient_name = patient_name,gender = gender,
+                        mobile = mobile, age = age,
+                        doctor_id = dr,booking_date = selected_date,
+                        time = selected_time, reference_no = reference_no
+                        )
+    
+        new_booking.save()
+        return redirect('patient:appointment_4')
+        
+
+        
+
+
+    dr_id = request.GET['dr']
+    selected_time = request.GET['time']
+    selected_date = datetime.strptime(request.GET['date'], '%Y-%m-%d').date().strftime('%d-%m-%Y')
+    doctor = Doctor.objects.get(id = dr_id)
+    doctor_name = doctor.doctor_name
+    fee = doctor.fee
+    department = doctor.department.department
+
+
+    
+    context = {
+        'dr_name' : doctor_name,
+        'dep' : department,  
+        'selected_date' : selected_date,
+        'selected_time' :selected_time,
+        'fee': fee
+    }
+
+    return render(request,'patient/appt_3.html',context)
 
 def appt_4(request):
-    return render(request,'patient/appt_4.html')
+    latest_booking = Booking.objects.filter(patient = request.session['patient']).last()
+    
+    doctor_name = latest_booking.doctor.doctor_name
+    dep = latest_booking.doctor.department.department
+    reference_no = latest_booking.reference_no
+    booking_date = latest_booking.booking_date
+    booking_time = latest_booking.time
 
-def appt_list(request):
-    return render(request,'patient/appointment_list.html')
+    context = {
+        'doctor_name' : doctor_name,
+        'dep' : dep,
+        'reference_no' : reference_no,
+        'booking_date' : booking_date,
+        'booking_time' : booking_time
+
+    }
+    return render(request,'patient/appt_4.html',  context)
+
+def booking_history(request):
+    return render(request,'patient/booking_history.html')
 
 
 def get_doctors(request):
