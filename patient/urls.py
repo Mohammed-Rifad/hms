@@ -19,6 +19,7 @@ urlpatterns = [
     path('booking-confirmation', views.appt_4, name='appointment_4'),
     path('booking-history', views.booking_history, name='booking_history'),
     path('get-doctors', views.get_doctors, name='get_doctors'),
-    path('check-availability', views.check_availability, name='check-availability')
-
+    path('check-availability', views.check_availability, name='check-availability'),
+    path('booking/cancel/<int:id>',views.cancel_booking,name = 'cancel_booking'),
+    path('logout',views.logout,name = 'logout')
 ]

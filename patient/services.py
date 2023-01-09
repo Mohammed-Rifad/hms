@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 import time
+from hms_admin.models import Consultation
+from .models import Booking
 
 
 def get_slots(time1, time2):
@@ -57,4 +59,47 @@ def create_slots(query_set):
      
     return  available_slots
    
- 
+
+def create_bookings(query_set):
+    booking_arr = []
+    booking_dict ={}
+
+    for i in query_set:
+        print(i.time,'heree')
+
+
+def generate_slot(doctor,date, day):
+    
+    sessions = []
+    session_obj = {}
+    time_arr = []
+    time_obj ={}
+
+    book_time = []
+
+    consultaion_records = Consultation.objects.filter(doctor = doctor, day = day).values('time')
+    booking_records = Booking.objects.filter(doctor = doctor, booking_date = date).values('time')
+      
+    for record in booking_records:
+        book_time.append(record['time'])
+    
+     
+    # booktime - doctors booking for particular date
+
+        
+    for records in consultaion_records:
+
+        time = records['time'].split(' - ')
+        slots = get_slots(time[0], time[1])
+
+        for i in slots : 
+            
+            if book_time.count(i) > 0:
+                time_obj[i] = 'booked'
+
+            else:
+                time_obj[i] = 'not booked'
+
+    sessions.append(time_obj)
+    print(sessions)
+    return sessions

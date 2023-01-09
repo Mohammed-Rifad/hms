@@ -47,7 +47,7 @@
                                         <line x1="8" y1="2" x2="8" y2="6"></line>
                                         <line x1="3" y1="10" x2="21" y2="10"></line>
                                     </svg> &ensp;
-                                    <a href="{% url 'patient:appointment_list' %}">Appointments</a>
+                                    <a href="{% url 'patient:booking_history' %}">Appointments</a>
                                 </h5>
 
                             </li>
@@ -115,7 +115,7 @@
                                         <h6 class="mb-0">Age</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" name="p_age" value="{{ patient.age }}">
+                                        <input type="text" class="form-control" readonly name="p_age" value="{{ patient.age }}">
                                     </div>
                                 </div>
                                 <hr>
@@ -124,7 +124,7 @@
                                         <h6 class="mb-0">Gender</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" name="p_gender"
+                                        <input type="text" class="form-control" readonly name="p_gender"
                                             value="{{ patient.gender }}">
                                     </div>
                                 </div>
@@ -134,8 +134,16 @@
                                         <h6 class="mb-0">Blood Group</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" name="blood_grp"
-                                            value="{{ patient.blood_grp }}">
+                                        <select class="form-select mt-3 form-control"  name="blood_grp" id="p_bg" required>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <hr>

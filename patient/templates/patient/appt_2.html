@@ -186,9 +186,12 @@
 
     <!-- row start  -->
     <div class="row slot">
-        <div class="col-1"></div>
-        <div class="col-1" id="time_slot">
-            <button type="button" class="btn btn-outline-light" id="style">04:00 pm</button>
+        
+        <div class="col-12" id="time_slot">
+             
+<!-- display button here -->
+
+
         </div>
 
         <div class="col-1"></div>
@@ -243,53 +246,51 @@
             type: 'POST',
             data: {
                 dr_id: dr_id,
-                'selected_day': selected_day
+                'selected_day': selected_day,
+                'selected_date' : $('#consultation_date').val()
             },
 
             success: function (response) {
 
                 let status = response.availability
                 var records = response.consultation_record
-
+                 
 
                 if (status == true) {
 
                     $('#div_slot').show()
                     $('#err_div').hide()
 
+                    console.log('bookings',response.bookings)
+
 
                     let records = response.consultation_record
 
                     console.log(response.consultation_record)
 
-                    for (var i = 0; i < records.length; i++) {
+                    
 
-                        let obj = records[i]
+var bookings = response.bookings[0]
 
-                        console.log(obj)
+btn_no = 1
+for(let time in bookings){
+    console.log(time,bookings[time]);
+    let btn = document.createElement("button")
+    let btn_id = 'btn' + btn_no
+    btn.setAttribute('id', btn_id)
+    btn.setAttribute('onclick', 'display()')
+    btn.setAttribute('class', 'session-btn btn-border btn-time')
 
-                        for (let j in obj) {
-
-                            console.log('key', obj[j])
-
-                            let arr = obj[j]
-
-                            for (let k = 0; k < arr.length; k++) {
-
-                                let btn = document.createElement("button")
-                                let btn_id = 'btn' + (k + 1)
-                                btn.setAttribute('id', btn_id)
-                                btn.setAttribute('onclick', 'display()')
-                                btn.setAttribute('class', 'session-btn btn-border')
-
-                                btn.innerHTML = arr[k]
-                                session_div.append(btn)
-                            }
-                        }
-
-
-
-                    }
+    if(bookings[time] == 'booked')
+    {
+       
+        btn.setAttribute('disabled', 'true')
+    }
+    btn.innerHTML = time
+    session_div.append(btn)
+    btn_no ++
+}
+                    
 
 
                 }
@@ -309,14 +310,23 @@
 
 
     var selected_slot;
+    var selected_btn;
     function display() {
 
+       
+        console.log(event.target.id,'////')
         selected_slot = document.getElementById(event.target.id)
+        let all_btn = document.getElementsByClassName('btn-time')
+        selected_btn = event.target.id
+        for(let i = 0; i<all_btn.length; i++){
 
-        btn_id = event.target.id
-        console.log(selected_slot.value)
+            all_btn[i].style.backgroundColor = ''
+        }
 
-        selected_slot.style.background = "green"
+
+        // alert(selected_slot.innerHTML)
+
+        selected_slot.style.backgroundColor = "green"
         $('#btn_proceed').show()
     }
 
@@ -324,11 +334,12 @@
 
          
 
-        let selected_time = document.getElementById(btn_id).innerHTML
+        let selected_time = document.getElementById(selected_btn).innerHTML
+        console.log(selected_time)
         let selected_date = $('#consultation_date').val()
         
 
-        window.location.href = "{% url 'patient:appointment_3' %}?dr=" + dr_id + "&&date=" + selected_date + "&&time=" + selected_time
+        window.location.href = "{% url 'patient:appointment_3' %}?dr=" + dr_id + "&date=" + selected_date + "&time=" + selected_time
 
     })
 
