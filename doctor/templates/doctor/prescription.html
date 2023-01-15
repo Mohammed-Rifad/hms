@@ -1,4 +1,4 @@
-{% extends 'doctor/doctor_masterpage.html' %}
+{% extends 'doctor/doctor_master.html' %}
 {% load static %}
 
 {% block header %}
@@ -14,27 +14,62 @@
 <!-- Prescription  -->
 <div class="container" id="pres">
     <div class="row justify-content-center">
-        <div class="col-lg-7 text-center">
-            <button type="button"> Add New </button>
+        <div class="col-lg-5 text-center">
+            <h3>Add Prescription</h3>
             <div class="mt-5">
-                <table class="table table-primary table-striped">
+                <table class="table  table-striped">
                     <tr>
-                        <th> Date </th>
-                        <th> Patient </th>
-                        <th> Medicine </th>
-                        <th> Options </th>
-                        <th> Action </th>
+                        <td><input type="text" class="form-control" placeholder="medicine name" name="" id=""></td>
+                        <td><input type="number" min="1" class="form-control" placeholder="days" name="" id=""></td>
                     </tr>
                     <tr>
-                        <td> 12:00:00 </td>
-                        <td> Alexnder James </td>
-                        <td> </td>
-                        <td></td>
-                        <td> <button type="button" class="btn btn-light"> Generate </button> </td>
+                        <td>Time of the day</td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="radio" name="" id=""> Morning
+                            <input type="radio" name="" id=""> Noon
+                            <input type="radio" name="" id=""> Evening
+                            <input type="radio" name="" id=""> Night
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            To be Taken
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="radio" name="" id=""> Morning
+                            <input type="radio" name="" id=""> Noon
+                            <input type="radio" name="" id=""> Evening
+                            <input type="radio" name="" id=""> Night
+                        </td>
+                    </tr>
+                    <tr align="center">
+                         
+                        <td align="center"><button class="btn btn-danger">ADD</button></td>
                     </tr>
                 </table>
             </div>
         </div>
+
+        <div class="col-lg-5 text-center">
+                <table class="table table-hover">
+                    <tr>
+                        <td>Sl No</td>
+                        <th>Medicine</th>
+                        <th>Days</th>
+                        <th>Time</th>
+                        <th>To be taken</th>
+                    </tr>
+                </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2"><button class="btn btn-success">Sumbit</button></div>
     </div>
 </div>
 

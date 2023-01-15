@@ -9,11 +9,11 @@ urlpatterns = [
     path('contact', views.contact, name='contact'),
     path('departments', views.dept, name='depts'),
     path('services', views.service, name='services'),
-    path('dept-single', views.dept_single, name='dept-single'),
-    path('doctor-single', views.doctor_single, name='dr-single'),
+    path('department/<int:id>', views.department_details, name='department_details'),
+    path('doctor/<int:id>', views.doctor_details, name='doctor_details'),
     path('doctor', views.doctor, name='dr'),
     path('user-type', views.user_type, name='user_type'),
     path('login', views.login, name='login'),
     path('register', views.patient_registration, name='pat_register'),
-    
+    path('make-appointment',views.make_appointment,name = 'make_appointment')
 ]

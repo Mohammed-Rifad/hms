@@ -4,13 +4,25 @@ from . models import Booking
 from hms_admin.models import Department,Doctor,Consultation
 from datetime import datetime
 from random import randint
+from django.db.models import Q
 from .services import get_slots,create_slots,create_bookings,generate_slot
 from django.http import JsonResponse,HttpResponse
 # Create your views here.
 def home(request):
     patient = Patient.objects.filter(id = request.session['patient']).values('patient_name')
     pat_name = patient[0]['patient_name']
-    return render(request,'patient/patient_home.html', {'pat_name' : pat_name})
+    booking_count = Booking.objects.filter(patient = request.session['patient']).count()
+    cancelled_count = Booking.objects.filter(patient = request.session['patient'], status = 'cancelled').count()
+    
+    last_booking = Booking.objects.filter(patient = request.session['patient']).values('booking_date','time','reference_no','status')
+    
+    context = {
+        'pat_name' : pat_name,
+        'last_booking' : last_booking,
+        'booking' :  booking_count,
+        'cancelled_count':cancelled_count
+        }
+    return render(request,'patient/patient_home.html', context)
 
 def appointment(request): # old appointment
     return render(request,'patient/appointment.html')
@@ -169,9 +181,9 @@ def appt_4(request):
     }
     return render(request,'patient/appt_4.html',  context)
 
-def booking_history(request):
-    booking_records = Booking.objects.filter(patient = request.session['patient'])
-    return render(request,'patient/booking_history.html', {'booking_records' : booking_records,})
+def my_bookings(request):
+    booking_records = Booking.objects.filter(patient = request.session['patient'], status= 'booked')
+    return render(request,'patient/my_bookings.html', {'booking_records' : booking_records,})
 
 
 def get_doctors(request):
@@ -197,17 +209,12 @@ def check_availability(request):
     if consultation_record :
         available = True
 
-        # booking_details = Booking.objects.filter(doctor = dr_id, booking_date = selected_date).all()
-        # bookings = [ {'time' : booking.time} for booking in booking_details]
-        # print(booking_details,'iouy')
-        # create_bookings(booking_details)
-        # data_set = create_slots(consultation_record)
+        
         slots =generate_slot(dr_id,selected_date,selected_day)
         print('frm views',slots)
         return JsonResponse({'availability': available,'consultation_record' : '','bookings' :slots })
         
-       # return JsonResponse({'availability': available,'consultation_record' : data_set,'bookings' :bookings })
-
+        
     else:
         available = False
 
@@ -228,3 +235,8 @@ def cancel_booking(request,id):
     record.status = 'cancelled'
     record.save()
     return redirect('patient:booking_history')
+
+def booking_history(request):
+    booking_records = Booking.objects.filter(Q(status = 'cancelled') | Q(status = 'completed'),patient = request.session['patient'],  )
+
+    return render(request, 'patient/booking_history.html',{'booking_records' :booking_records,})

@@ -30,29 +30,21 @@
 							<th> Reference No</th>
 							<th>Patient Name</th>
 							 
-							<th> Date </th>
+							 
 							<th> Time </th>
-							<th> Status </th>
-							{% if record.status == 'booked' %}
-							<th> Action </th>
-							{% endif %}
+							<th></th>
 						</tr>
 						{% for record in booking_records %}
 						<tr>
 							<td>{{ forloop.counter }}</td>
 							<td>{{ record.reference_no }}</td>
 							<td> {{ record.patient.patient_name | title }} </td>
-							<td> {{ record.doctor.doctor_name | title }} </td>
-							<td> {{ record.booking_date }} </td>
+						 
+							 
 							<td> {{ record.time }} </td>
 
-							<td> {{ record.status }}</td>
-							{% if record.status == 'booked' %}
-							<td> <a href="{% url 'patient:cancel_booking' record.id %}" class="btn btn-danger"> Cancel
-								</a> </td>
-
-
-							{% endif %}
+							<td><a href="{% url 'doctor:patient_details' record.id %}" class="btn btn-danger">Details</a></td>
+							 
 						</tr>
 
 						{% endfor %}

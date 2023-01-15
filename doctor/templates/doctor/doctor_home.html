@@ -11,7 +11,7 @@
 
 <h1 style="color: rgb(6, 6, 165);  text-align: center;"
 class="mb-4">
-Welcome {{ doc_name | title }}
+Welcome Dr.{{ doc_name | title }}
 </h1>
 
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -19,41 +19,47 @@ Welcome {{ doc_name | title }}
   <div class="row">
     <div class="col-md-12">
       <div class="card-category-5">
-        <!-- <div class="category-name">Personal Cards</div> <br/><br/> -->
-
+        
         <ul class="all-pr-cards">
           <li>
-            <div class="per-card-3">
-              <div class="card-image">
-                <span></span>
-                <img src="{% static 'assets/img/calendar.png' %}" class="logo" />
-              </div>
+             <div class="per-card-3" style="height: 200px;">
+                 <div class="card-image">
+                     <span></span>
+                     <img src="{% static 'assets/img/calendar.png' %}" height="200px" class="logo" />
+                   </div>
+                 <div class="card-body">
+                   <h5 class="card-title">Today's Appointment</h5>
+                   <p class="card-text"> Total Booking : {{last_booking.0.reference_no }}</p>
+                   
+                    
+                 </div>
+               </div>
+            </li>
+       
+         
+            <li>
+             <a href="{% url 'patient:booking_history' %}">
+             <div class="per-card-3" style="height: 200px;">
+                 <div class="card-image">
+                     <span></span>
+                     <img src="{% static 'assets/img/calendar.png' %}" height="200px" class="logo" />
+                   </div>
+                 <div class="card-body">
+                   <h5 class="card-title">Search Patients</h5>
+                   <p class="card-text"> Total Patients : {{ patients_count }}</p>
+                  
+                   
+                    
+                 </div>
+               </div>
+             </a>
+            </li>
+       </ul>
 
-              <div class="card-content">
-                <span class="per-position"><br /><br />TOTAL APPOINTMENTS</span>
-                <div class="social-icons">
-                  <i class="fa-solid fa-7"><br /><a style="color: #fff" href="{% url 'doctor:appointment' %}">0</a> </i>
-                </div>
-              </div>
-            </div>
-          </li>
+         
 
-          <li>
-            <div class="per-card-3">
-              <div class="card-image">
-                <span></span>
-                <img src="{% static 'images/pt.png' %}" class="logo" />
-              </div>
 
-              <div class="card-content">
-                <span class="per-position"><br /><br /> PATIENTS LIST</span>
-                <div class="social-icons">
-                  <i class="fa-solid fa-7"><br /><a style="color: #fff" href="{% url 'doctor:search-pt' %}">0</a> </i>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
+
       </div>
 
       <!-- <div class="card-category-5">

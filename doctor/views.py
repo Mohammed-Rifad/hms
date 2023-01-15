@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from hms_admin.models import Doctor
+from django.http import JsonResponse
+from common.models import Patient
 from patient.models import Booking
 # Create your views here.
 
@@ -8,7 +10,8 @@ def doctor_home(request):
     doctor = Doctor.objects.filter(
         id=request.session['doctor']).values('doctor_name')
     doc_name = doctor[0]['doctor_name']
-    return render(request, 'doctor/doctor_home.html', {'doc_name': doc_name})
+    patients_count = Patient.objects.all().count()
+    return render(request, 'doctor/doctor_home.html', {'doc_name': doc_name,'patients_count': patients_count})
 
 
 def profile(request):
@@ -46,8 +49,11 @@ def appointment(request):
     return render(request, 'doctor/appointment.html',{'booking_records' : records})
 
 
-def patient_search(request):
-    return render(request, 'doctor/pt_search.html')
+def search_patients(request):
+    patients_list = Patient.objects.all()
+    return render(request, 'doctor/search_patients.html', {'patients_list': patients_list})
+
+
 
 
 def change_password(request):
@@ -63,20 +69,43 @@ def change_password(request):
 
         if new_password == confirm_password:
             if len(new_password) > 8:
-                doctor = Doctor.objects.filter(id=request.session['doctor']).values(
-                    'password')  # getting doctor details
-                doctor.password = new_password
-                doctor.save()
-                success_msg = 'Password Changed'
+                
+                doctor = Doctor.objects.get(id=request.session['doctor'])
+                
+                if doctor.password == old_password:
+                    doctor.password = new_password
+                    doctor.save()
+                    success_msg = 'Password Changed'
+                
+                else:
+                    error_msg = 'Incorrect Password'
 
             else:
                 error_msg = 'Password Should Be Min 8 Characters'
 
         else:
-            error_msg = 'Invalid Password'
+            error_msg = 'Password does\'nt match'
 
     return render(request, 'doctor/change_paswd.html', {'error_msg': error_msg, 'success_msg': success_msg})
 
 
 def consulting(request):
     return render(request, 'doctor/consulting.html')
+
+
+def get_patients(request):
+    search_text = request.GET['search_text']
+    
+    search_result = Patient.objects.filter(patient_name__icontains = search_text)
+
+    serialized_set = [{ 'id' : p.id, 'p_name' : p.patient_name.title() }  for p in search_result]
+    return JsonResponse({'search_result' : serialized_set})
+
+
+def patient_details(request,b_id):
+    booking_record = Booking.objects.get(id = b_id) 
+    
+    return render(request,'doctor/patient_details.html', {'booking_record' : booking_record,})
+
+def add_prescription(request,b_id):
+    return render(request,'doctor/prescription.html', )

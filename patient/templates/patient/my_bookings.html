@@ -6,41 +6,56 @@
 
 {% block content %}
 
-<h1 style="color: rgb(6, 6, 165); margin-top: 50px; text-align: center;"
-  class="mb-4"> Booking History </h1>
 
-<section class="appoinment section">
-  <div class="container">
+<h1 style="color: rgb(6, 6, 165); text-align: center;">
+    Appointment List
+  </h1>
+  
+  <section class="appoinment section">
+      <div class="container">
+        <div class="row">
+          {% if booking_records %}
+            <table class="table table-primary table-striped">
+                <tr>
+                    <th>Sl No</th>
+                    <th> Reference No</th>
+                    <th>Patient Name</th>
+                    <th> Doctor </th>
+                    <th> Date </th>
+                    <th> Time </th>
+                    <th> Status </th>
+                    {% if record.status == 'booked' %}
+                    <th> Action </th>
+                   {% endif %}
+                </tr>
+                {% for record in booking_records %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ record.reference_no }}</td>				
+                    <td> {{ record.patient.patient_name | title }} </td>
+                    <td> {{ record.doctor.doctor_name | title }} </td>
+                    <td> {{ record.booking_date }} </td>
+                    <td> {{ record.time }} </td>
+                    
+                    <td> {{ record.status }}</td>
+                    {% if record.status == 'booked' %}
+                    <td> <a href="{% url 'patient:cancel_booking' record.id %}" class="btn btn-danger"> Cancel </a>  </td>
 
 
-    <div class="row">
-		<table class="table table-primary table-striped">
-			<tr>
-                <th>Sl No </th>
-				<th>Ref Number</th>
-				<th> Doctor </th>
-				<th> Department </th>
-				<th> Fees </th>
-				<th> Date </th>
-				<th> Time </th>
-				<th> Status </th>
-				<th> Action </th>
-			</tr>
-			<tr>
-                <td>1</td>
-				<td>KJK54641</td>
-				<td> Thomas Henry </td>
-				<Td> Cardiology </Td>
-                <td> $435 </td>
-				<td> 21-08-2022 </td>
-				<td> 10:00:00 </td>
-				<td> Active</td>
-				<td> <button type="button" class="btn btn-light"> Cancel </button>  </td>
-			</tr>
-           
-		  </table>    
-    </div>
-  </div>
-</section>
+                    {%  endif %}
+                  </tr>
+
+                {% endfor %}
+               
+              </table> 
+
+              {% else %}
+
+              <h2> No Records Found</h2>
+              
+              {% endif %}
+        </div>
+      </div>
+    </section>
 
 {% endblock %}

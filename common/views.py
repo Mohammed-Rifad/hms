@@ -1,7 +1,8 @@
 import string
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,reverse
 from hms_admin.models import Staff,Doctor
 from .models import Patient
+from hms_admin.models import Department
 # Create your views here.
 def home(request):
     return render(request,'common/homepage.html')
@@ -16,7 +17,8 @@ def contact(request):
     return render(request,'common/contact.html')
 
 def dept(request):
-    return render(request,'common/department.html')
+    departments = Department.objects.all()
+    return render(request,'common/department.html',{'departments':departments,})
 
 def service(request):
     return render(request,'common/service.html')
@@ -62,8 +64,16 @@ def patient_registration(request):
 def login(request):
     user_type = request.GET['user']
     msg = ''
-     
-     
+    
+    if 'patient' in request.session :
+        return redirect('patient:home')
+
+    if 'doctor' in request.session :
+        return redirect('doctor:dr_home')
+
+    if 'staff' in request.session :
+        return redirect('staff:staff_home') 
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -91,6 +101,10 @@ def login(request):
             try :
                 patient = Patient.objects.get(email = username, phone = password)
                 request.session['patient'] = patient.id
+                if request.session['log'] == True :
+                    return redirect('patient:appointment_1')
+
+                request.session['log'] = False
                 return redirect('patient:home')
             except Exception as e :
                 print(e)
@@ -99,17 +113,26 @@ def login(request):
         
     return render(request,'common/login.html', {'error_msg' : msg})
 
-def dept_single(request):
-    return render(request,'common/department_single.html')
+def department_details(request,id):
+    department = Department.objects.get(id = id)
+    doctors = Doctor.objects.filter(department = id)
+    return render(request,'common/department_details.html',{ 'department': department,'doctors' : doctors})
 
-def doctor_single(request):
-    return render(request,'common/doctor_single.html')
+def doctor_details(request,id):
+    doctor = Doctor.objects.get(id = id)
+    return render(request,'common/doctor_details.html',{'doctor': doctor,})
 
 def doctor(request):
     return render(request,'common/hms_doctor.html')
 
 
+def make_appointment(request):
+ 
+    if 'patient' in request.session:
+        return redirect('patient:appointment_1') 
 
-
-
+  
+    request.session['log'] = True
+    return redirect(reverse('common:login') + '?user=patient') 
+    
 
