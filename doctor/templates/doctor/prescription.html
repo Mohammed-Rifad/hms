@@ -2,11 +2,14 @@
 {% load static %}
 
 {% block header %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     #pres {
         min-height: 400px;
     }
 </style>
+
 {% endblock %}
 
 
@@ -15,23 +18,27 @@
 <div class="container" id="pres">
     <div class="row justify-content-center">
         <div class="col-lg-5 text-center">
+            <input type="hidden" id = 'book_id' value="{{ booking_id }}" name="" id="">
             <h3>Add Prescription</h3>
             <div class="mt-5">
                 <table class="table  table-striped">
                     <tr>
-                        <td><input type="text" class="form-control" placeholder="medicine name" name="" id=""></td>
-                        <td><input type="number" min="1" class="form-control" placeholder="days" name="" id=""></td>
+                        <td><input type="text" class="form-control" placeholder="medicine name" name="medicine_name"
+                                id="medicine_name"></td>
+                        <td><input type="number" min="1" class="form-control" placeholder="days" name="days" id="days">
+                        </td>
                     </tr>
                     <tr>
                         <td>Time of the day</td>
-                        
+
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="radio" name="" id=""> Morning
-                            <input type="radio" name="" id=""> Noon
-                            <input type="radio" name="" id=""> Evening
-                            <input type="radio" name="" id=""> Night
+                            <input type="radio" name="medicine_time" value="Morning" checked class="medicine_time">
+                            Morning
+                            <input type="radio" name="medicine_time" value="Noon" class="medicine_time"> Noon
+                            <input type="radio" name="medicine_time" value="Evening" class="medicine_time"> Evening
+                            <input type="radio" name="medicine_time" value="Night" class="medicine_time"> Night
                         </td>
                     </tr>
                     <tr>
@@ -41,36 +48,176 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="radio" name="" id=""> Morning
-                            <input type="radio" name="" id=""> Noon
-                            <input type="radio" name="" id=""> Evening
-                            <input type="radio" name="" id=""> Night
+                            <input type="radio" name="intake_time" class="intake_time" value="Before Food" id=""
+                                checked> Before Food
+                            <input type="radio" name="intake_time" class="intake_time" value="After Food" id=""> After
+                            Food
+
                         </td>
                     </tr>
                     <tr align="center">
-                         
-                        <td align="center"><button class="btn btn-danger">ADD</button></td>
+
+                        <td align="center"><button type="button" class="btn btn-danger"
+                                id="add_prescription">ADD</button></td>
                     </tr>
                 </table>
             </div>
         </div>
 
         <div class="col-lg-5 text-center">
-                <table class="table table-hover">
-                    <tr>
-                        <td>Sl No</td>
-                        <th>Medicine</th>
-                        <th>Days</th>
-                        <th>Time</th>
-                        <th>To be taken</th>
-                    </tr>
-                </table>
+            <table class="table table-hover" id="prescription_tb">
+                <tr>
+
+                    <th>Medicine</th>
+                    <th>Days</th>
+                    <th>Time</th>
+                    <th>To be taken</th>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="row">
         <div class="col-md-10"></div>
-        <div class="col-md-2"><button class="btn btn-success">Sumbit</button></div>
+        <div class="col-md-2"><button class="btn btn-success" type="button" id="btn_presc">Sumbit</button></div>
     </div>
 </div>
+
+
+<script>
+
+    var object = {}
+    var object_arr = []
+    var tr_id = 1
+    $('#add_prescription').click(function () {
+
+
+
+        let medicine_name = document.getElementById('medicine_name').value
+        let days = document.getElementById('days').value
+
+        if (medicine_name == "" || days == "") {
+            alert('Please Enter Fields')
+            return
+        }
+
+
+
+        let medicine_time = document.getElementsByClassName('medicine_time')
+        let intake_time = document.getElementsByClassName('intake_time')
+        let prescription_tb = document.getElementById('prescription_tb')
+
+        let new_tr = document.createElement('tr')
+
+        let td_days = document.createElement('td')
+        let td_medicine_name = document.createElement('td')
+        let td_medicine_time = document.createElement('td')
+        let td_intake = document.createElement('td')
+        let td_presc = document.createElement('td')
+        let td_btn = document.createElement('span')
+
+
+
+        td_medicine_name.innerHTML = medicine_name
+        td_days.innerHTML = days
+
+        new_tr.appendChild(td_medicine_name)
+        new_tr.appendChild(td_days)
+
+
+        prescription_tb.appendChild(new_tr)
+        for (let i = 0; i < medicine_time.length; i++) {
+            if (medicine_time[i].checked == true) {
+                td_medicine_time.innerHTML = medicine_time[i].value
+                new_tr.appendChild(td_medicine_time)
+                break
+            }
+        }
+
+
+        for (let i = 0; i < intake_time.length; i++) {
+            if (intake_time[i].checked == true) {
+                td_intake.innerHTML = intake_time[i].value
+                new_tr.appendChild(td_intake)
+                break
+            }
+        }
+
+
+        td_btn.setAttribute('class', 'fa fa-trash fa-2x text-danger')
+        td_btn.setAttribute('onclick', 'deletePrescription()')
+        new_tr.appendChild(td_btn)
+        let id = "row" + tr_id
+        new_tr.setAttribute('id', id)
+        new_tr.setAttribute('class', 'presc_row')
+        tr_id++
+        new_tr.appendChild(td_btn)
+
+        object['medicine_name'] = medicine_name
+        object['days'] = days
+        object['medicine_time'] = td_medicine_time.innerHTML
+        object['intake_time'] = td_intake.innerHTML
+        object['booking'] = $('#book_id').val()
+
+        object_arr.push(object)
+
+        console.log(object_arr)
+
+    })
+
+
+    function deletePrescription() {
+
+        let selected_row = event.target.parentNode
+        document.getElementById('prescription_tb').removeChild(selected_row)
+
+    }
+</script>
+
+ 
+
+     
+
+<script>
+    $('#btn_presc').click(function () {
+
+        let prescription_rows = document.getElementsByClassName('presc_row')
+
+        if (prescription_rows.length > 0) {
+
+
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRFToken": '{{ csrf_token }}'
+                }
+            })
+
+
+            $.ajax({
+
+                url: "{% url 'doctor:submit_prescription' %}",
+                // contentType: 'application/json',
+                // dataType: 'json',
+                data: JSON.stringify({
+                     object_arr,
+                    // booking_id : $('#book_id').val()
+                }),
+                method: 'POST',
+
+                success: function (response) {
+
+                }
+
+            })
+
+
+
+
+
+            console.log(prescription_rows[0].children[0].innerHTML)
+        }
+
+    })
+</script>
+
 
 {% endblock %}

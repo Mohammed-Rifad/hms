@@ -240,3 +240,5 @@ def booking_history(request):
     booking_records = Booking.objects.filter(Q(status = 'cancelled') | Q(status = 'completed'),patient = request.session['patient'],  )
 
     return render(request, 'patient/booking_history.html',{'booking_records' :booking_records,})
+
+

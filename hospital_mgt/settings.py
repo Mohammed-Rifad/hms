@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'doctor',
     'hms_admin',
     'staff',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

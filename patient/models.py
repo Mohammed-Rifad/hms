@@ -17,3 +17,14 @@ class Booking(models.Model) :
 
     class Meta : 
         db_table = 'booking_tb'
+
+
+class Presciption(models.Model):
+    booking = models.ForeignKey(Booking,on_delete = models.CASCADE)
+    medicine_name = models.CharField(max_length = 20)
+    days = models.IntegerField()
+    medicine_time = models.CharField(max_length = 20)
+    intake_time = models.CharField(max_length = 20)
+
+    class Meta : 
+        db_table = 'prescription_tb'

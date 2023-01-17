@@ -3,6 +3,9 @@ from hms_admin.models import Doctor
 from django.http import JsonResponse
 from common.models import Patient
 from patient.models import Booking
+from datetime import datetime
+from .serializers import *
+from json import loads
 # Create your views here.
 
 
@@ -11,7 +14,10 @@ def doctor_home(request):
         id=request.session['doctor']).values('doctor_name')
     doc_name = doctor[0]['doctor_name']
     patients_count = Patient.objects.all().count()
-    return render(request, 'doctor/doctor_home.html', {'doc_name': doc_name,'patients_count': patients_count})
+     # today = datetime.strftime(datetime.today(), "%d/%m/%Y")
+    today = "15-01-2023" 
+    total_bookings = Booking.objects.filter(doctor = request.session['doctor'],booking_date = today, status = 'booked').count()
+    return render(request, 'doctor/doctor_home.html', {'doc_name': doc_name,'patients_count': patients_count, 'total_bookings' : total_bookings })
 
 
 def profile(request):
@@ -44,7 +50,10 @@ def edit_profile(request):
 
 
 def appointment(request):
-    records = Booking.objects.filter(doctor = request.session['doctor'], status = 'booked')
+     
+    # today = datetime.strftime(datetime.today(), "%d/%m/%Y")
+    today = "15-01-2023" 
+    records = Booking.objects.filter(doctor = request.session['doctor'], status = 'booked',booking_date = today)
 
     return render(request, 'doctor/appointment.html',{'booking_records' : records})
 
@@ -108,4 +117,22 @@ def patient_details(request,b_id):
     return render(request,'doctor/patient_details.html', {'booking_record' : booking_record,})
 
 def add_prescription(request,b_id):
-    return render(request,'doctor/prescription.html', )
+    return render(request,'doctor/prescription.html', {'booking_id':b_id})
+
+def submit_prescription(request):
+
+    # prescription = request.POST['prescription']
+
+    params = loads(request.body)
+
+     
+    print(params)
+    serialized_data = PrescriptionSerializer(data = params,many = True)
+
+    if serialized_data.is_valid():
+        serialized_data.save()
+    
+    else :
+        print('errore')
+        print(serialized_data.errors)
+    return JsonResponse(params)

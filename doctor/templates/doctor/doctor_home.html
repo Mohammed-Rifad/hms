@@ -22,6 +22,7 @@ Welcome Dr.{{ doc_name | title }}
         
         <ul class="all-pr-cards">
           <li>
+            <a href="{% url 'doctor:appointment' %}">
              <div class="per-card-3" style="height: 200px;">
                  <div class="card-image">
                      <span></span>
@@ -29,15 +30,17 @@ Welcome Dr.{{ doc_name | title }}
                    </div>
                  <div class="card-body">
                    <h5 class="card-title">Today's Appointment</h5>
-                   <p class="card-text"> Total Booking : {{last_booking.0.reference_no }}</p>
+                   <p class="card-text"> Total Booking : {{ total_bookings }}</p>
                    
                     
                  </div>
                </div>
+
+            </a>
             </li>
        
          
-            <li>
+            {% comment %} <li>
              <a href="{% url 'patient:booking_history' %}">
              <div class="per-card-3" style="height: 200px;">
                  <div class="card-image">
@@ -53,7 +56,7 @@ Welcome Dr.{{ doc_name | title }}
                  </div>
                </div>
              </a>
-            </li>
+            </li> {% endcomment %}
        </ul>
 
          
